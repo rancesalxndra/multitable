@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication Table Generator</title>
+<style>
+table {
+border-collapse: collapse;
+margin-top: 20px;
+width: 100%;
+}
+table, th, td {
+border: 1px solid black;
+}
+th, td {
+padding: 10px;
+text-align: center;
+}
+input {
+margin: 10px 5px;
+padding: 5px;
+}
+label {
+font-size: 16px;
+}
+button {
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>Multiplication Table Generator</h2>
+
+<div>
+<label for="rows">Number of Rows: </label>
+<input type="number" id="rows" min="1" value="5">
+<label for="cols">Number of Columns: </label>
+<input type="number" id="cols" min="1" value="5">
+<button onclick="generateTable()">Generate Table</button>
+</div>
+
+<div id="tableContainer"></div>
+
+<script>
+function generateTable() {
+const rows = parseInt(document.getElementById("rows").value);
+const cols = parseInt(document.getElementById("cols").value);
+
+// Validate input values
+if (rows < 1 || cols < 1) {
+alert("Please enter valid numbers greater than 0 for rows and columns.");
+return;
+}
+
+// Create the table element
+let tableHTML = '<table>';
+
+// Add column headers (1 to cols)
+tableHTML += '<tr><th>*</th>';
+for (let c = 1; c <= cols; c++) {
+tableHTML += <th>${c}</th>;
+}
+tableHTML += '</tr>';
+
+// Add rows with multiplication values
+for (let r = 1; r <= rows; r++) {
+tableHTML += <tr><th>${r}</th>;
+for (let c = 1; c <= cols; c++) {
+tableHTML += <td>${r * c}</td>;
+}
+tableHTML += '</tr>';
+}
+
+tableHTML += '</table>';
+
+// Insert the generated table into the table container
+document.getElementById("tableContainer").innerHTML = tableHTML;
+}
+</script>
+
+</body>
+</html>
