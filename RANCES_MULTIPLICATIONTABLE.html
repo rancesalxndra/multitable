@@ -1,86 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multiplication Table Generator</title>
-<style>
-table {
-border-collapse: collapse;
-margin-top: 20px;
-width: 100%;
-}
-table, th, td {
-border: 1px solid black;
-}
-th, td {
-padding: 10px;
-text-align: center;
-}
-input {
-margin: 10px 5px;
-padding: 5px;
-}
-label {
-font-size: 16px;
-}
-button {
-padding: 10px 20px;
-font-size: 16px;
-cursor: pointer;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function generateTable() {
+            const rows = parseInt(document.getElementById('rows').value);
+            const cols = parseInt(document.getElementById('cols').value);
+            const tableContainer = document.getElementById('tableContainer');
+            
+            if (isNaN(rows) || isNaN(cols) || rows <= 0 || cols <= 0) {
+                tableContainer.innerHTML = "<div class='alert alert-danger'>Please enter valid positive numbers.</div>";
+                return;
+            }
+
+            let tableHTML = "<table class='table table-bordered mt-4'><thead><tr><th></th>";
+
+            for (let j = 1; j <= cols; j++) {
+                tableHTML += <th>${j}</th>;
+            }
+            tableHTML += "</tr></thead><tbody>";
+
+            
+            for (let i = 1; i <= rows; i++) {
+                tableHTML += <tr><th>${i}</th>;
+                for (let j = 1; j <= cols; j++) {
+                    tableHTML += <td>${i * j}</td>;
+                }
+                tableHTML += "</tr>";
+            }
+            tableHTML += "</tbody></table>";
+
+            tableContainer.innerHTML = tableHTML;
+        }
+    </script>
 </head>
-<body>
-
-<h2>Multiplication Table Generator</h2>
-
-<div>
-<label for="rows">Number of Rows: </label>
-<input type="number" id="rows" min="1" value="5">
-<label for="cols">Number of Columns: </label>
-<input type="number" id="cols" min="1" value="5">
-<button onclick="generateTable()">Generate Table</button>
-</div>
-
-<div id="tableContainer"></div>
-
-<script>
-function generateTable() {
-const rows = parseInt(document.getElementById("rows").value);
-const cols = parseInt(document.getElementById("cols").value);
-
-// Validate input values
-if (rows < 1 || cols < 1) {
-alert("Please enter valid numbers greater than 0 for rows and columns.");
-return;
-}
-
-// Create the table element
-let tableHTML = '<table>';
-
-// Add column headers (1 to cols)
-tableHTML += '<tr><th>*</th>';
-for (let c = 1; c <= cols; c++) {
-tableHTML += <th>${c}</th>;
-}
-tableHTML += '</tr>';
-
-// Add rows with multiplication values
-for (let r = 1; r <= rows; r++) {
-tableHTML += <tr><th>${r}</th>;
-for (let c = 1; c <= cols; c++) {
-tableHTML += <td>${r * c}</td>;
-}
-tableHTML += '</tr>';
-}
-
-tableHTML += '</table>';
-
-// Insert the generated table into the table container
-document.getElementById("tableContainer").innerHTML = tableHTML;
-}
-</script>
-
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center">Multiplication Table</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="rows">Number of Rows:</label>
+                    <input type="number" id="rows" class="form-control" placeholder="Enter number of rows">
+                </div>
+                <div class="form-group">
+                    <label for="cols">Number of Columns:</label>
+                    <input type="number" id="cols" class="form-control" placeholder="Enter number of columns">
+                </div>
+                <button class="btn btn-primary btn-block" onclick="generateTable()">Generate Table</button>
+            </div>
+        </div>
+        <div id="tableContainer" class="mt-4"></div>
+    </div>
 </body>
 </html>
