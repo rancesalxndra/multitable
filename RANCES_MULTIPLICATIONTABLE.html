@@ -15,26 +15,25 @@
                 tableContainer.innerHTML = "<div class='alert alert-danger'>Please enter valid positive numbers.</div>";
                 return;
             }
-
             let tableHTML = "<table class='table table-bordered mt-4'><thead><tr><th></th>";
-
-            for (let j = 1; j <= cols; j++) {
-                tableHTML += <th>${j}</th>;
+                    for (let j = 1; j <= cols; j++) {
+                tableHTML += `<th>${j}</th>`;  
             }
             tableHTML += "</tr></thead><tbody>";
-
+        
             
             for (let i = 1; i <= rows; i++) {
-                tableHTML += <tr><th>${i}</th>;
+                tableHTML += `<tr><th>${i}</th>`; 
                 for (let j = 1; j <= cols; j++) {
-                    tableHTML += <td>${i * j}</td>;
+                    tableHTML += `<td>${i * j}</td>`;  
                 }
                 tableHTML += "</tr>";
             }
             tableHTML += "</tbody></table>";
-
+        
             tableContainer.innerHTML = tableHTML;
         }
+        
     </script>
 </head>
 <body class="bg-light">
